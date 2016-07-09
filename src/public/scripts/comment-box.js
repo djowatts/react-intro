@@ -1,3 +1,14 @@
+function generateUUID() {
+    // credit to user briguy37 on JSFiddle (https://jsfiddle.net/briguy37/2MVFd/)
+    var d = new Date().getTime();
+    var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = (d + Math.random()*16)%16 | 0;
+        d = Math.floor(d/16);
+        return (c=='x' ? r : (r&0x3|0x8)).toString(16);
+    });
+    return uuid;
+};
+
 var Comment = React.createClass({
  rawMarkup: function() {
     var md = new Remarkable();
@@ -89,6 +100,10 @@ var CommentBox = React.createClass({
         });
     },
     handleCommentSubmit: function(comment) {
+        var comments = this.state.data;
+        comment.id = generateUUID();
+        var newComments = comments.concat([comment]);
+        this.setState({data: newComments});
         $.ajax({
             url: this.props.url,
             dataType: 'json',
