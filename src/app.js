@@ -1,18 +1,3 @@
-var fs = require('fs');
-var path = require('path');
-var express = require('express');
-var bodyParser = require('body-parser');
-var app = express();
-
-var dataDirecory = './data';
-
-app.listen(3000, function(){
-    console.log('Server started: http://localhost:3000/');
-});
-
-app.use('/', express.static(path.join(dataDirecory,'public')));
-app.use(bodyParser.json());
-
 /**
  * This file provided by Facebook is for non-commercial testing and evaluation
  * purposes only. Facebook reserves all rights not expressly granted.
@@ -33,7 +18,7 @@ var app = express();
 
 var COMMENTS_FILE = path.join(__dirname, 'comments.json');
 
-app.set('port', (process.env.PORT || 3000));
+app.set('port', (process.env.PORT || 3001));
 
 app.use('/', express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
